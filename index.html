@@ -3,51 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple HTML Resume</title>
+    <title>Dynamic Text Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        #outputParagraph {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 20px;
+            min-height: 50px; /* Ensure visibility */
+            background-color: #f9f9f9;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 70%;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>[Harshit Arora]</h1>
-    <p>Web Developer | Frontend Enthusiast</p>
+    <h1>Dynamic Text Updater</h1>
+    <p>Enter some text below and click 'Update' to see the paragraph change!</p>
 
-    <hr>
-    <h2>Career Objective</h2>
-    <p>
-        To secure a challenging position in a reputable organization to expand my learnings, knowledge, and skills. 
-        A highly motivated and dedicated individual eager to contribute to team success through hard work, attention to detail, and excellent organizational skills.
-    </p>
+    <input type="text" id="textInput" placeholder="Type your text here...">
 
-    <hr>
-    <h2>Education</h2>
-    <ul>
-        <li>
-            <strong>Bachelor of Science in Computer Science (B.Sc. CS)</strong>
-            <p>Quad AI | Graduation Year: [2029]</p>
-        </li>
-        <li>
-            <strong>Higher Secondary Education (HSE)</strong>
-            <p>Infant Jesus School | Completion Year: [2025]</p>
-        </li>
-    </ul>
+    <button id="updateButton">Update Text</button>
 
-    <hr>
-    <h2>Skills</h2>
-    <ul>
-        <li><strong>Frontend Technologies:</strong> HTML5, CSS3, JavaScript (Basic)</li>
-        <li><strong>Design Tools:</strong> [Figma, Canva]</li>
-        <li><strong>Soft Skills:</strong> Teamwork, Problem-Solving, Time Management</li>
-    </ul>
-    
-    <hr>
-    <h2>Contact Details</h2>
-    <ul>
-        <li><strong>Email:</strong> aroraharshit@gmail.com</li>
-        <li><strong>Phone:</strong> 7979872322</li>
-        <li><strong>LinkedIn:</strong> linkedin.com/in/harshitonweb</li>
-    </ul>
-    
-    <hr>
-    <p style="text-align: center;">End of Resume</p>
+    <div id="outputParagraph">
+        <p id="dynamicText">The content of this paragraph will change!</p>
+    </div>
+
+    <script>
+        // FUNCTION DEFINITION: The core logic
+        function updateParagraph() {
+            // 1. Get the HTML elements using DOM methods (getElementById)
+            const inputField = document.getElementById('textInput');
+            const outputParagraph = document.getElementById('dynamicText');
+
+            // 2. Get the value (text) entered by the user
+            const newText = inputField.value;
+
+            // 3. Modify the webpage content dynamically (using innerText)
+            if (newText.trim() === "") {
+                outputParagraph.innerText = "Please enter some text to update the paragraph.";
+            } else {
+                outputParagraph.innerText = "You entered: " + newText;
+                
+                // Optional: Clear the input field after updating
+                inputField.value = ""; 
+            }
+        }
+
+        // EVENT HANDLING: Attach the function to the button click
+        // Get the button element
+        const button = document.getElementById('updateButton');
+        
+        // Add an event listener for the 'click' event
+        button.addEventListener('click', updateParagraph);
+
+        // Optional: Also update on pressing 'Enter' in the input field
+        const input = document.getElementById('textInput');
+        input.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                updateParagraph();
+            }
+        });
+        
+    </script>
 
 </body>
 </html>
